@@ -7,7 +7,7 @@ import com.atguigu.yygh.model.user.UserInfo;
 import com.atguigu.yygh.user.service.UserInfoService;
 import com.atguigu.yygh.user.utils.ConstantWxPropertiesUtils;
 import com.atguigu.yygh.user.utils.HttpClientUtils;
-import com.sun.deploy.net.URLEncoder;
+//import com.sun.deploy.net.URLEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -102,7 +102,7 @@ public class WeixinApiController {
             String token = JwtHelper.createToken(userInfo.getId(), name);
             map.put("token", token);
             //跳转到前端页面
-            return "redirect:" + ConstantWxPropertiesUtils.YYGH_BASE_URL + "/weixin/callback?token="+map.get("token")+ "&openid="+map.get("openid")+"&name="+URLEncoder.encode(map.get("name"),"utf-8");
+            return "redirect:" + ConstantWxPropertiesUtils.YYGH_BASE_URL + "/weixin/callback?token="+map.get("token")+ "&openid="+map.get("openid")+"&name="+"URLEncoder.encode(map.get(name),utf-8)";
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -119,11 +119,11 @@ public class WeixinApiController {
             map.put("appid", ConstantWxPropertiesUtils.WX_OPEN_APP_ID);
             map.put("scope","snsapi_login");
             String wxOpenRedirectUrl = ConstantWxPropertiesUtils.WX_OPEN_REDIRECT_URL;
-            wxOpenRedirectUrl = URLEncoder.encode(wxOpenRedirectUrl, "utf-8");
+            wxOpenRedirectUrl = "URLEncoder.encode(wxOpenRedirectUrl, utf-8)";
             map.put("redirect_uri",wxOpenRedirectUrl);
             map.put("state",System.currentTimeMillis()+"");
             return Result.ok(map);
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
